@@ -33,14 +33,14 @@ int maxMinX=400,maxMinY=300,zeroX=180,zeroY=180;
 // encodeur 
 int zero;
 #define BUTTON  5 //ky-040 sw  pin, interrupt & add 100nF/0.1uF capacitors between pin & ground!!!
-int16_t ailerons,aileronsMax,aileronsMin,elevator, elevatorEncod ,elevatorMax = 1481,elevatorMin = -1479, mapForce;
+int16_t ailerons, aileronsAnalog ,aileronsMax,aileronsMin,elevator, elevatorEncod ,elevatorMax = 1481,elevatorMin = -1479, mapForce;
+boolean serialTest = false;
 //RotaryEncoderAdvanced<int> YokeEncAil(EncodAilPin1, EncodAilPin2, BUTTON,1,0,4000);
 //RotaryEncoderAdvanced<int> YokeEncProf(EncodProfPin1, EncodProfPin2, BUTTON,1,-2000,2000);
-Encoder YokeEncAil(EncodAilPin1,EncodAilPin2);
+//Encoder YokeEncAil(EncodAilPin1,EncodAilPin2);
 Encoder YokeEncProf(EncodProfPin1,EncodProfPin2);
 
 #define HALLPIN A2
-int sensorValue;
 /*
 void encoderISRA()                                            //interrupt service routines need to be in ram
 {
@@ -142,7 +142,7 @@ void receive(){
 
 
 void encodCenter(){
-  YokeEncAil.write(0);
+  //YokeEncAil.write(0);
   //YokeEncProf.write(0);
 }
 
@@ -171,17 +171,20 @@ void testButton(){
 
 
 void readEncoder(){
-  long position = YokeEncAil.read();
+  //long position = YokeEncAil.read();
+  long position = analogRead(HALLPIN);
+  if(serialTest)Serial.println(position);
   //Serial.println(position);
-  if(position != ailerons){
+  if(position != aileronsAnalog){
+    ailerons = map(position, 155,880,-1023,1023 );
     //Serial.print("X : ");
     //Serial.println(position);
-    ailerons = position;
+    aileronsAnalog = position;
   }
   position = YokeEncProf.read();
   if(position != elevatorEncod){
-    Serial.print("Y : ");
-    Serial.println(position);
+    //Serial.print("Y : ");
+    //Serial.println(position);
     if (position < 0)
     {
       elevator = map(position, elevatorMin,-1,-1023,0 );
@@ -191,7 +194,7 @@ void readEncoder(){
       elevator = map(position, 0, elevatorMax, 0, 1023);
     }
     elevatorEncod = position;
-    Serial.println(elevator);
+    //Serial.println(elevator);
   }
 }
 
@@ -437,11 +440,18 @@ void RWSerial(){
       case 'i':
 				mygains[1].inertiaGain = readVal();
 				break;
+      case 'p':
+        if(serialTest){
+          serialTest = false;
+        }else{
+          serialTest = true;
+        }
       case 'Z':
 				recordXYVal();
 				break;
       default :
-        Serial.print("Tap H or h for read variable !");
+        Serial.println("Tap H or h for read variable !");
+        Serial.println("Tap p for Serial Test");
         break;
 		}
     delay(250); // for antirebond
@@ -519,8 +529,6 @@ void loop(){
 
   receive();
   ////////decode();
-  sensorValue = analogRead(HALLPIN);
-  Serial.println(sensorValue);
   //delay(200);
 
   readEncoder();

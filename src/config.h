@@ -16,7 +16,7 @@
 
 #define EncodAilPin1  6
 #define EncodAilPin2  2
-#define EncodProfPin1 7
+#define EncodProfPin1 2
 #define EncodProfPin2 3
 
 #define TX1 7 //rose -> marron RX1 PA4
