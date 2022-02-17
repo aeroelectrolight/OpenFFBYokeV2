@@ -366,6 +366,27 @@ void recordXYVal(){
   adresse += sizeof(maxMinY);
   EEPROM.put(adresse, zeroY);
   adresse += sizeof(zeroY);
+  //
+  EEPROM.put(adresse, mygains[0].totalGain);
+  adresse += sizeof(mygains[0].totalGain);
+  EEPROM.put(adresse, mygains[0].springGain);
+  adresse += sizeof(mygains[0].springGain);
+  EEPROM.put(adresse, mygains[0].damperGain);
+  adresse += sizeof(mygains[0].damperGain);
+  EEPROM.put(adresse, mygains[0].frictionGain);
+  adresse += sizeof(mygains[0].frictionGain);
+  EEPROM.put(adresse, mygains[0].inertiaGain);
+  adresse += sizeof(mygains[0].inertiaGain);
+  EEPROM.put(adresse, mygains[1].totalGain);
+  adresse += sizeof(mygains[1].totalGain);
+  EEPROM.put(adresse, mygains[1].springGain);
+  adresse += sizeof(mygains[1].springGain);
+  EEPROM.put(adresse, mygains[1].damperGain);
+  adresse += sizeof(mygains[1].damperGain);
+  EEPROM.put(adresse, mygains[1].frictionGain);
+  adresse += sizeof(mygains[1].frictionGain);
+  EEPROM.put(adresse, mygains[1].inertiaGain);
+  adresse += sizeof(mygains[1].inertiaGain);
 }
 
 void getXYVal(){
@@ -378,6 +399,27 @@ void getXYVal(){
   adresse += sizeof(maxMinY);
   EEPROM.get(adresse, zeroY);
   adresse += sizeof(zeroY);
+  ///
+  EEPROM.get(adresse, mygains[0].totalGain);
+  adresse += sizeof(mygains[0].totalGain);
+  EEPROM.get(adresse, mygains[0].springGain);
+  adresse += sizeof(mygains[0].springGain);
+  EEPROM.get(adresse, mygains[0].damperGain);
+  adresse += sizeof(mygains[0].damperGain);
+  EEPROM.get(adresse, mygains[0].frictionGain);
+  adresse += sizeof(mygains[0].frictionGain);
+  EEPROM.get(adresse, mygains[0].inertiaGain);
+  adresse += sizeof(mygains[0].inertiaGain);
+  EEPROM.get(adresse, mygains[1].totalGain);
+  adresse += sizeof(mygains[1].totalGain);
+  EEPROM.get(adresse, mygains[1].springGain);
+  adresse += sizeof(mygains[1].springGain);
+  EEPROM.get(adresse, mygains[1].damperGain);
+  adresse += sizeof(mygains[1].damperGain);
+  EEPROM.get(adresse, mygains[1].frictionGain);
+  adresse += sizeof(mygains[1].frictionGain);
+  EEPROM.get(adresse, mygains[1].inertiaGain);
+  adresse += sizeof(mygains[1].inertiaGain);
 }
 
 int readVal(){
