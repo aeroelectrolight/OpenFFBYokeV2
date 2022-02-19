@@ -331,6 +331,20 @@ void readMyGains(){
   Serial.println(mygains[0].frictionGain);
   Serial.print("I inertiaGain X : ");
   Serial.println(mygains[0].inertiaGain);
+  /*
+  Serial.print("C constantGain Y : ");
+  Serial.println(mygains[0].constantGain);
+  Serial.print("R rampGain Y : ");
+  Serial.println(mygains[0].rampGain);
+  Serial.print("Q squareGain Y : ");
+  Serial.println(mygains[0].squareGain);
+  */
+  Serial.print("N sineGain Y : ");
+  Serial.println(mygains[0].sineGain);
+  /*
+  Serial.print("G triangleGain Y : ");
+  Serial.println(mygains[0].triangleGain);
+  */
   Serial.print("t totalGain Y : ");
   Serial.println(mygains[1].totalGain);
   Serial.print("s springGain Y : ");
@@ -341,6 +355,21 @@ void readMyGains(){
   Serial.println(mygains[1].frictionGain);
   Serial.print("i inertiaGain Y : ");
   Serial.println(mygains[1].inertiaGain);
+  /*
+  Serial.print("c constantGain Y : ");
+  Serial.println(mygains[1].constantGain);
+  Serial.print("r rampGain Y : ");
+  Serial.println(mygains[1].rampGain);
+  Serial.print("q squareGain Y : ");
+  Serial.println(mygains[1].squareGain);
+  */
+  Serial.print("n sineGain Y : ");
+  Serial.println(mygains[1].sineGain);
+  /*
+  Serial.print("g triangleGain Y : ");
+  Serial.println(mygains[1].triangleGain);
+  */
+  Serial.print("Tap Z for record ! ");
 }
 
 void readValMaxMin(){
@@ -377,6 +406,20 @@ void recordXYVal(){
   adresse += sizeof(mygains[0].frictionGain);
   EEPROM.put(adresse, mygains[0].inertiaGain);
   adresse += sizeof(mygains[0].inertiaGain);
+  /*
+  EEPROM.put(adresse, mygains[0].constantGain);
+  adresse += sizeof(mygains[0].constantGain);
+  EEPROM.put(adresse, mygains[0].rampGain);
+  adresse += sizeof(mygains[0].rampGain);
+  EEPROM.put(adresse, mygains[0].squareGain);
+  adresse += sizeof(mygains[0].squareGain);
+  */
+  EEPROM.put(adresse, mygains[0].sineGain);
+  adresse += sizeof(mygains[0].sineGain);
+  /*
+  EEPROM.put(adresse, mygains[0].triangleGain);
+  adresse += sizeof(mygains[0].triangleGain);
+  */
   EEPROM.put(adresse, mygains[1].totalGain);
   adresse += sizeof(mygains[1].totalGain);
   EEPROM.put(adresse, mygains[1].springGain);
@@ -387,6 +430,21 @@ void recordXYVal(){
   adresse += sizeof(mygains[1].frictionGain);
   EEPROM.put(adresse, mygains[1].inertiaGain);
   adresse += sizeof(mygains[1].inertiaGain);
+  /*
+  EEPROM.put(adresse, mygains[1].constantGain);
+  adresse += sizeof(mygains[1].constantGain);
+  EEPROM.put(adresse, mygains[1].rampGain);
+  adresse += sizeof(mygains[1].rampGain);
+  EEPROM.put(adresse, mygains[1].squareGain);
+  adresse += sizeof(mygains[1].squareGain);
+  */
+  EEPROM.put(adresse, mygains[1].sineGain);
+  adresse += sizeof(mygains[1].sineGain);
+  /*
+  EEPROM.put(adresse, mygains[1].triangleGain);
+  adresse += sizeof(mygains[1].triangleGain);
+  */
+  Serial.print("Values record ! ");
 }
 
 void getXYVal(){
@@ -410,6 +468,20 @@ void getXYVal(){
   adresse += sizeof(mygains[0].frictionGain);
   EEPROM.get(adresse, mygains[0].inertiaGain);
   adresse += sizeof(mygains[0].inertiaGain);
+  /*
+  EEPROM.get(adresse, mygains[0].constantGain);
+  adresse += sizeof(mygains[0].constantGain);
+  EEPROM.get(adresse, mygains[0].rampGain);
+  adresse += sizeof(mygains[0].rampGain);
+  EEPROM.get(adresse, mygains[0].squareGain);
+  adresse += sizeof(mygains[0].squareGain);
+  */
+  EEPROM.get(adresse, mygains[0].sineGain);
+  adresse += sizeof(mygains[0].sineGain);
+  /*
+  EEPROM.get(adresse, mygains[0].triangleGain);
+  adresse += sizeof(mygains[0].triangleGain);
+  */
   EEPROM.get(adresse, mygains[1].totalGain);
   adresse += sizeof(mygains[1].totalGain);
   EEPROM.get(adresse, mygains[1].springGain);
@@ -420,6 +492,20 @@ void getXYVal(){
   adresse += sizeof(mygains[1].frictionGain);
   EEPROM.get(adresse, mygains[1].inertiaGain);
   adresse += sizeof(mygains[1].inertiaGain);
+  /*
+  EEPROM.get(adresse, mygains[1].constantGain);
+  adresse += sizeof(mygains[1].constantGain);
+  EEPROM.get(adresse, mygains[1].rampGain);
+  adresse += sizeof(mygains[1].rampGain);
+  EEPROM.get(adresse, mygains[1].squareGain);
+  adresse += sizeof(mygains[1].squareGain);
+  */
+  EEPROM.get(adresse, mygains[1].sineGain);
+  adresse += sizeof(mygains[1].sineGain);
+  /*
+  EEPROM.get(adresse, mygains[1].triangleGain);
+  adresse += sizeof(mygains[1].triangleGain);
+  */
 }
 
 int readVal(){
@@ -467,6 +553,21 @@ void RWSerial(){
       case 'I':
 				mygains[0].inertiaGain = readVal();
 				break;
+      case 'C':
+				mygains[0].constantGain = readVal();
+				break;
+			case 'R':
+				mygains[0].rampGain = readVal();
+				break;
+			case 'Q':
+				mygains[0].squareGain = readVal();
+				break;
+			case 'N':
+				mygains[0].sineGain = readVal();
+				break;
+      case 'G':
+				mygains[0].triangleGain = readVal();
+				break;
       case 't':
 				mygains[1].totalGain = readVal();
 				break;
@@ -481,6 +582,21 @@ void RWSerial(){
 				break;
       case 'i':
 				mygains[1].inertiaGain = readVal();
+				break;
+      case 'c':
+				mygains[1].constantGain = readVal();
+				break;
+			case 'r':
+				mygains[1].rampGain = readVal();
+				break;
+			case 'q':;
+				mygains[1].squareGain = readVal();
+				break;
+			case 'n':
+				mygains[1].sineGain = readVal();
+				break;
+      case 'g':
+				mygains[1].triangleGain = readVal();
 				break;
       case 'p':
         if(serialTest){
